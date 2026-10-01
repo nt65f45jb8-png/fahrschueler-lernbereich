@@ -31,14 +31,14 @@ html,body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f2;col
 
 #enter{
  position:absolute;z-index:3;
- left:50%;top:27%;
+ left:50%;top:auto;bottom:9%;
  transform:translateX(-50%);
- width:min(68vw,285px);
+ width:min(60vw,250px);
  border:1px solid rgba(255,255,255,.7);
  border-radius:4px;
  background:rgba(255,255,255,.94);
  color:#111;
- padding:14px 18px;
+ padding:14px 16px;
  font-size:13px;
  letter-spacing:.07em;
  font-weight:750;
