@@ -1,8 +1,13 @@
 *{box-sizing:border-box}
 html,body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f2;color:#111}
 .locked{overflow:hidden}
+<<<<<<< Updated upstream
 #intro{position:relative;height:100svh;overflow:hidden;background:#111}
 .hero{position:absolute;inset:0;background:url("startbild.jpg") center/cover no-repeat}
+=======
+#intro{position:relative;height:100dvh;overflow:hidden;background:#111}
+.hero{position:absolute;inset:-3%;background:url("startbild.jpg") center/cover no-repeat;animation:zoom 14s ease-in-out infinite alternate}
+>>>>>>> Stashed changes
 .shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.12),rgba(0,0,0,.03) 42%,rgba(0,0,0,.36) 100%)}
 
 .introText{
@@ -105,8 +110,12 @@ a:focus-visible,button:focus-visible{outline:3px solid #c83b30;outline-offset:3p
 /* Shared fixed header on every HTML page. */
 :root{--header-height:88px}
 .site-header{position:fixed;inset:0 0 auto;z-index:20;height:var(--header-height);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 24px;background:rgba(15,17,20,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);text-shadow:0 1px 5px rgba(0,0,0,.65)}
+<<<<<<< Updated upstream
 .site-header .site-brand{display:block;flex-shrink:0;margin:0;color:#e1261c;text-decoration:none;line-height:1.5}
 .site-header .site-brand em{color:#fff}
+=======
+.site-header .site-brand{display:block;flex-shrink:0;margin:0;color:#fff;text-decoration:none;line-height:1.5}
+>>>>>>> Stashed changes
 .site-navigation{display:flex;align-items:center;gap:4px}
 .site-navigation a{display:flex;align-items:center;justify-content:center;padding:12px 10px;border-radius:6px;color:#fff;font-size:13px;line-height:1.4;text-align:center;text-decoration:none}
 .site-navigation a:hover,.site-navigation a:focus-visible{background:rgba(255,255,255,.15)}
@@ -118,6 +127,12 @@ a:focus-visible,button:focus-visible{outline:3px solid #c83b30;outline-offset:3p
 .box-number{display:block;margin-bottom:28px;color:#c83b30;font-size:12px;font-weight:800;letter-spacing:.16em}
 .intro-box h3{margin:0 0 16px;font-size:25px;line-height:1.2;letter-spacing:-.025em}
 .step-icon{display:block;width:80px;height:80px;margin-top:24px}
+<<<<<<< Updated upstream
+=======
+.whatsapp-link{color:#a62e25;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.whatsapp-link:hover{color:#711f19}
+.imprint-address{font-style:normal;line-height:1.8}
+>>>>>>> Stashed changes
 @keyframes box-appear{from{opacity:0;transform:translateY(48px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:no-preference){
   .reveal-ready .intro-box{opacity:0;transform:translateY(48px) scale(.95)}
@@ -149,7 +164,11 @@ a:focus-visible,button:focus-visible{outline:3px solid #c83b30;outline-offset:3p
 @media(max-width:480px){.classes.material-tiles{gap:28px}.material-tiles > article > .content{padding:18px}}
 
 .contact-card{display:grid;grid-template-columns:minmax(160px,220px) minmax(0,1fr);align-items:center;gap:32px;padding:28px;background:#fff;border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.06)}
+<<<<<<< Updated upstream
 .contact-photo{display:block;width:100%;height:auto;object-fit:contain;border-radius:10px;margin-inline:auto}
+=======
+.contact-photo{display:block;width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;object-position:center bottom;border-radius:10px}
+>>>>>>> Stashed changes
 .contact-photo-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#eeede9;color:#777}
 .contact-photo-placeholder span{font-size:48px;letter-spacing:-.04em;color:#c83b30;font-weight:700}
 .contact-photo-placeholder small{font-size:13px}
@@ -157,6 +176,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #c83b30;outline-offset:3p
 .contact-info p{font-size:16px;line-height:1.7;color:#555}
 .contact-info .contact-number{margin-top:24px;color:#111}
 .contact-note{display:block;font-size:12px;color:#777;line-height:1.5}
+<<<<<<< Updated upstream
 @media(max-width:600px){.contact-card{grid-template-columns:1fr;padding:22px;gap:24px}.contact-photo{max-width:100%}.contact-info h2{font-size:26px}}
 
 .steps-title{grid-column:1/-1;margin:0 0 24px;text-align:center;font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.035em}
@@ -189,3 +209,8 @@ body:has(.mobile-drawer[open]){overflow-y:hidden!important}
   .site-navigation{display:none}
   .mobile-menu-button{display:flex;flex-shrink:0}
 }
+=======
+@media(max-width:600px){.contact-card{grid-template-columns:1fr;padding:22px;gap:24px}.contact-photo{max-width:220px}.contact-info h2{font-size:26px}}
+
+.steps-title{grid-column:1/-1;margin:0 0 24px;text-align:center;font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.035em}
+>>>>>>> Stashed changes
