@@ -895,6 +895,8 @@ body:has(.mobile-drawer[open]) {
 .hall-of-fame {
   width: 100%;
   max-width: none;
+  min-height: 100vh;
+  min-height: 100lvh;
   padding: calc(var(--header-height) + 20px) 20px 20px;
 }
 
@@ -910,7 +912,7 @@ body:has(.mobile-drawer[open]) {
 
   .hall-of-fame-gallery figure {
     height: calc(100svh - var(--header-height) - 150px);
-    height: calc(100dvh - var(--header-height) - 150px);
+    height: calc(100lvh - var(--header-height) - 150px);
   }
 
   .hall-of-fame-gallery img {
