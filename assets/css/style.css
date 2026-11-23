@@ -908,7 +908,16 @@ body:has(.mobile-drawer[open]) {
     gap: 16px;
   }
 
+  .hall-of-fame-gallery figure {
+    height: calc(100svh - var(--header-height) - 150px);
+    height: calc(100dvh - var(--header-height) - 150px);
+  }
+
   .hall-of-fame-gallery img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
     max-height: none;
+    object-fit: contain;
   }
 }
