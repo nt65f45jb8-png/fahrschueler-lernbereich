@@ -939,3 +939,13 @@ body:has(.mobile-drawer[open]) {
   height: 100lvh !important;
   overflow: hidden !important;
 }
+
+@media (display-mode: standalone) and (max-width:700px) {
+  :root {
+    --header-height: calc(64px + env(safe-area-inset-top));
+  }
+
+  .home-page .site-header {
+    padding-top: calc(10px + env(safe-area-inset-top));
+  }
+}
