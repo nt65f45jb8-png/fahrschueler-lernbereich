@@ -895,10 +895,7 @@ body:has(.mobile-drawer[open]) {
   min-width: 0;
   margin: 0;
   padding: 0;
-  background: #111;
-  border: 1px solid #dededb;
   border-radius: 10px;
-  box-shadow: 0 7px 24px rgba(0, 0, 0, .045);
   overflow: hidden;
 }
 
@@ -908,6 +905,7 @@ body:has(.mobile-drawer[open]) {
   height: auto;
   max-height: 70vh;
   object-fit: contain;
+  border-radius: 10px;
 }
 
 .hall-of-fame {
