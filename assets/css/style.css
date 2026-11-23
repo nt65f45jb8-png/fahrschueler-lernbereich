@@ -886,11 +886,12 @@ body:has(.mobile-drawer[open]) {
   place-items: center;
   min-width: 0;
   margin: 0;
-  padding: 14px;
-  background: #fff;
+  padding: 0;
+  background: #111;
   border: 1px solid #dededb;
   border-radius: 10px;
   box-shadow: 0 7px 24px rgba(0, 0, 0, .045);
+  overflow: hidden;
 }
 
 .hall-of-fame-gallery img {
@@ -922,6 +923,8 @@ body:has(.mobile-drawer[open]) {
 
 @media (max-width:600px) {
   .hall-of-fame {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     height: 100dvh;
     min-height: 0;
@@ -929,12 +932,16 @@ body:has(.mobile-drawer[open]) {
     padding-bottom: 20px;
   }
 
+  .hall-of-fame > header {
+    flex: 0 0 auto;
+  }
+
   .hall-of-fame-gallery {
     position: relative;
     display: block;
-    height: calc(100vh - var(--header-height) - 155px);
-    height: calc(100dvh - var(--header-height) - 155px);
-    min-height: 260px;
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
     overflow: hidden;
     border-radius: 10px;
   }
@@ -944,7 +951,7 @@ body:has(.mobile-drawer[open]) {
     inset: 0;
     display: none;
     height: 100%;
-    padding: 10px;
+    padding: 0;
     overflow: hidden;
   }
 
@@ -962,22 +969,39 @@ body:has(.mobile-drawer[open]) {
 
   .hall-of-fame > .hall-of-fame-slider-controls {
     display: flex;
+    flex: 0 0 36px;
     justify-content: center;
+    align-items: center;
     gap: 10px;
-    padding: 14px 0 0;
+    margin-top: 8px;
   }
 
   .hall-of-fame > .hall-of-fame-slider-controls button {
-    width: 10px;
-    height: 10px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
     padding: 0;
     border: 0;
-    border-radius: 50%;
-    background: #b7b7b3;
+    border-radius: 4px;
+    background: transparent;
     cursor: pointer;
   }
 
+  .hall-of-fame > .hall-of-fame-slider-controls button::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #b7b7b3;
+  }
+
   .hall-of-fame > .hall-of-fame-slider-controls button[aria-pressed="true"] {
+    background: transparent;
+  }
+
+  .hall-of-fame > .hall-of-fame-slider-controls button[aria-pressed="true"]::before {
     background: #9d251f;
     transform: scale(1.2);
   }

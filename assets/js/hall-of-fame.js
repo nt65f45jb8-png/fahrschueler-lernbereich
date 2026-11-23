@@ -5,7 +5,6 @@ const mobileLayout = window.matchMedia("(max-width: 600px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let activeSlide = 0;
 let autoplay;
-let touchStartX = null;
 
 function showSlide(index) {
   activeSlide = (index + slides.length) % slides.length;
@@ -34,21 +33,6 @@ function updateLayout() {
 slideButtons.forEach(button => {
   button.addEventListener("click", () => showSlide(Number(button.dataset.slideTo)));
 });
-
-gallery.addEventListener("touchstart", event => {
-  touchStartX = event.changedTouches[0].clientX;
-}, { passive: true });
-
-gallery.addEventListener("touchend", event => {
-  if (touchStartX === null) return;
-
-  const touchDistance = event.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(touchDistance) > 40) {
-    showSlide(activeSlide + (touchDistance < 0 ? 1 : -1));
-  }
-
-  touchStartX = null;
-}, { passive: true });
 
 mobileLayout.addEventListener("change", updateLayout);
 reducedMotion.addEventListener("change", updateLayout);
