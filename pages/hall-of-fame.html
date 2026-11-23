@@ -49,12 +49,12 @@
       <a class="drawer-main-link" href="kontakt.html">Kontakt</a>
     </nav>
   </dialog>
-  <main id="learn" class="hall-of-fame">
+  <main class="hall-of-fame">
     <header>
       <h1 class="page-title">Hall of Fame</h1>
       <p>Erfolge unserer Fahrschülerinnen und Fahrschüler</p>
     </header>
-    <section class="hall-of-fame-gallery" aria-label="Auszeichnungen">
+    <section class="hall-of-fame-gallery" aria-label="Auszeichnungen" aria-roledescription="Karussell" aria-live="off">
       <figure>
         <img src="../assets/images/halloffame/License1.jpeg" alt="Auszeichnung License 1" loading="lazy">
       </figure>
@@ -62,7 +62,12 @@
         <img src="../assets/images/halloffame/License2.jpeg" alt="Auszeichnung License 2" loading="lazy">
       </figure>
     </section>
+    <nav class="hall-of-fame-slider-controls" aria-label="Hall of Fame Bilder">
+      <button type="button" aria-label="Lizenz 1 anzeigen" aria-pressed="true" data-slide-to="0"></button>
+      <button type="button" aria-label="Lizenz 2 anzeigen" aria-pressed="false" data-slide-to="1"></button>
+    </nav>
   </main>
+  <script src="../assets/js/hall-of-fame.js"></script>
   <script src="../assets/js/navigation.js"></script>
 </body>
 </html>
