@@ -9,6 +9,14 @@ html, body {
   color: #111;
 }
 
+html.home-document {
+  background: #111 url("../images/startbild.jpg") center / cover no-repeat;
+}
+
+body.home-page {
+  background: transparent;
+}
+
 .locked {
   overflow: hidden;
 }
