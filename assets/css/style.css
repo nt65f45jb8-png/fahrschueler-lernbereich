@@ -15,7 +15,8 @@ html, body {
 
 #intro {
   position: relative;
-  height: 100svh;
+  height: 100vh;
+  height: 100lvh;
   overflow: hidden;
   background: #111;
 }
@@ -922,4 +923,11 @@ body:has(.mobile-drawer[open]) {
     max-height: none;
     object-fit: contain;
   }
+}
+
+
+.home-page:not(.locked) {
+  height: 100vh !important;
+  height: 100lvh !important;
+  overflow: hidden !important;
 }
