@@ -10,6 +10,7 @@ const lastSlideClone = slides.at(-1).cloneNode(true);
 let currentPosition = 1;
 let touchStartX = null;
 let touchStartY = null;
+let lastSwipeAt = 0;
 
 function prepareClone(clone) {
   clone.dataset.clone = "true";
@@ -88,6 +89,17 @@ function moveOneSlide(step) {
   moveTo(currentPosition + step);
 }
 
+function handleSwipe(startX, startY, endX, endY) {
+  const deltaX = endX - startX;
+  const deltaY = endY - startY;
+
+  if (Math.abs(deltaX) <= 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+  if (Date.now() - lastSwipeAt < 400) return;
+
+  lastSwipeAt = Date.now();
+  moveOneSlide(deltaX < 0 ? 1 : -1);
+}
+
 track.addEventListener("transitionend", event => {
   if (event.propertyName === "transform") resetAfterLoop();
 });
@@ -104,6 +116,27 @@ slideArrows.forEach(button => {
   });
 });
 
+gallery.addEventListener("pointerdown", event => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+
+  touchStartX = event.clientX;
+  touchStartY = event.clientY;
+  gallery.setPointerCapture(event.pointerId);
+});
+
+gallery.addEventListener("pointerup", event => {
+  if (touchStartX === null || touchStartY === null) return;
+
+  handleSwipe(touchStartX, touchStartY, event.clientX, event.clientY);
+  touchStartX = null;
+  touchStartY = null;
+});
+
+gallery.addEventListener("pointercancel", () => {
+  touchStartX = null;
+  touchStartY = null;
+});
+
 gallery.addEventListener("touchstart", event => {
   const touch = event.changedTouches[0];
   touchStartX = touch.clientX;
@@ -114,12 +147,7 @@ gallery.addEventListener("touchend", event => {
   if (touchStartX === null || touchStartY === null) return;
 
   const touch = event.changedTouches[0];
-  const deltaX = touch.clientX - touchStartX;
-  const deltaY = touch.clientY - touchStartY;
-
-  if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
-    moveOneSlide(deltaX < 0 ? 1 : -1);
-  }
+  handleSwipe(touchStartX, touchStartY, touch.clientX, touch.clientY);
 
   touchStartX = null;
   touchStartY = null;

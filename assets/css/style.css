@@ -950,7 +950,9 @@ body:has(.mobile-drawer[open]) {
     min-height: 0;
     overflow: hidden;
     border-radius: 10px;
-    touch-action: pan-y;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .hall-of-fame-track {
@@ -982,6 +984,8 @@ body:has(.mobile-drawer[open]) {
     max-width: 100%;
     max-height: none;
     object-fit: contain;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   .hall-of-fame > .hall-of-fame-slider-controls {
