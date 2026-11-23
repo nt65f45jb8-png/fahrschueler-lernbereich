@@ -991,8 +991,14 @@ body:has(.mobile-drawer[open]) {
     flex: 0 0 36px;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 8px;
     margin-top: 8px;
+  }
+
+  .hall-of-fame > .hall-of-fame-slider-controls .slider-dots {
+    display: flex;
+    align-items: center;
+    gap: 0;
   }
 
   .hall-of-fame > .hall-of-fame-slider-controls button {
@@ -1008,7 +1014,24 @@ body:has(.mobile-drawer[open]) {
     cursor: pointer;
   }
 
-  .hall-of-fame > .hall-of-fame-slider-controls button::before {
+  .hall-of-fame > .hall-of-fame-slider-controls .slider-arrow {
+    width: 24px;
+    height: 32px;
+    border-radius: 4px;
+    color: #777;
+    font: inherit;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .hall-of-fame > .hall-of-fame-slider-controls .slider-arrow:hover,
+  .hall-of-fame > .hall-of-fame-slider-controls .slider-arrow:focus-visible {
+    background: rgba(0, 0, 0, .06);
+    color: #333;
+  }
+
+  .hall-of-fame > .hall-of-fame-slider-controls .slider-dots button::before {
     content: "";
     width: 8px;
     height: 8px;
