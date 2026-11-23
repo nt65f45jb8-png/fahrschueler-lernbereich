@@ -1,37 +1,85 @@
 const gallery = document.querySelector(".hall-of-fame-gallery");
-const slides = [...gallery.querySelectorAll("figure")];
+const track = gallery.querySelector(".hall-of-fame-track");
+const slides = [...track.querySelectorAll("figure")];
 const slideButtons = [...document.querySelectorAll("[data-slide-to]")];
 const mobileLayout = window.matchMedia("(max-width: 600px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-let activeSlide = 0;
+const firstSlideClone = slides[0].cloneNode(true);
+let currentPosition = 0;
 let autoplay;
 
-function showSlide(index) {
-  activeSlide = (index + slides.length) % slides.length;
+firstSlideClone.dataset.clone = "true";
+firstSlideClone.inert = true;
+firstSlideClone.setAttribute("aria-hidden", "true");
+firstSlideClone.querySelector("img").alt = "";
+track.append(firstSlideClone);
 
-  slides.forEach((slide, slideIndex) => {
-    const isActive = slideIndex === activeSlide;
-    slide.hidden = mobileLayout.matches && !isActive;
-    slide.classList.toggle("is-active", isActive);
-    slide.setAttribute("aria-hidden", String(mobileLayout.matches && !isActive));
+function updateAccessibility() {
+  const activeSlide = currentPosition % slides.length;
+
+  slides.forEach((slide, index) => {
+    slide.setAttribute("aria-hidden", String(mobileLayout.matches && index !== activeSlide));
   });
 
-  slideButtons.forEach((button, buttonIndex) => {
-    button.setAttribute("aria-pressed", String(buttonIndex === activeSlide));
+  firstSlideClone.setAttribute("aria-hidden", String(!mobileLayout.matches || currentPosition !== slides.length));
+
+  slideButtons.forEach((button, index) => {
+    button.setAttribute("aria-pressed", String(index === activeSlide));
   });
 }
 
-function updateLayout() {
-  showSlide(activeSlide);
-  clearInterval(autoplay);
+function moveTo(position, animate = true) {
+  currentPosition = position;
+  track.style.transition = animate && !reducedMotion.matches ? "" : "none";
+  track.style.transform = `translateX(-${position * 100}%)`;
+  updateAccessibility();
 
-  if (mobileLayout.matches && !reducedMotion.matches && slides.length > 1) {
-    autoplay = setInterval(() => showSlide(activeSlide + 1), 5000);
+  if (!animate || reducedMotion.matches) {
+    track.getBoundingClientRect();
+    track.style.transition = "";
   }
 }
 
+function resetAfterLoop() {
+  if (currentPosition !== slides.length) return;
+
+  track.style.transition = "none";
+  currentPosition = 0;
+  track.style.transform = "translateX(0)";
+  updateAccessibility();
+  track.getBoundingClientRect();
+  track.style.transition = "";
+}
+
+function updateLayout() {
+  clearInterval(autoplay);
+
+  if (!mobileLayout.matches) {
+    currentPosition = 0;
+    track.style.transition = "none";
+    track.style.transform = "";
+    firstSlideClone.hidden = true;
+    updateAccessibility();
+    return;
+  }
+
+  firstSlideClone.hidden = false;
+  moveTo(0, false);
+
+  if (!reducedMotion.matches && slides.length > 1) {
+    autoplay = setInterval(() => moveTo(currentPosition + 1), 5000);
+  }
+}
+
+track.addEventListener("transitionend", event => {
+  if (event.propertyName === "transform") resetAfterLoop();
+});
+
 slideButtons.forEach(button => {
-  button.addEventListener("click", () => showSlide(Number(button.dataset.slideTo)));
+  button.addEventListener("click", () => {
+    const target = Number(button.dataset.slideTo);
+    moveTo(target);
+  });
 });
 
 mobileLayout.addEventListener("change", updateLayout);
