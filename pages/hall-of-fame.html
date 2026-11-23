@@ -55,16 +55,22 @@
       <p>Erfolge unserer Fahrschülerinnen und Fahrschüler</p>
     </header>
     <section class="hall-of-fame-gallery" aria-label="Auszeichnungen" aria-roledescription="Karussell" aria-live="off">
-      <figure>
-        <img src="../assets/images/halloffame/License1.jpeg" alt="Auszeichnung License 1" loading="lazy">
-      </figure>
-      <figure>
-        <img src="../assets/images/halloffame/License2.jpeg" alt="Auszeichnung License 2" loading="lazy">
-      </figure>
+      <div class="hall-of-fame-track">
+        <figure>
+          <img src="../assets/images/halloffame/License1.jpeg" alt="Auszeichnung License 1" loading="lazy">
+        </figure>
+        <figure>
+          <img src="../assets/images/halloffame/License2.jpeg" alt="Auszeichnung License 2" loading="lazy">
+        </figure>
+      </div>
     </section>
     <nav class="hall-of-fame-slider-controls" aria-label="Hall of Fame Bilder">
-      <button type="button" aria-label="Lizenz 1 anzeigen" aria-pressed="true" data-slide-to="0"></button>
-      <button type="button" aria-label="Lizenz 2 anzeigen" aria-pressed="false" data-slide-to="1"></button>
+      <button class="slider-arrow" type="button" aria-label="Vorheriges Bild" data-slide-step="-1">‹</button>
+      <div class="slider-dots" role="group" aria-label="Bild auswählen">
+        <button type="button" aria-label="Lizenz 1 anzeigen" aria-pressed="true" data-slide-to="0"></button>
+        <button type="button" aria-label="Lizenz 2 anzeigen" aria-pressed="false" data-slide-to="1"></button>
+      </div>
+      <button class="slider-arrow" type="button" aria-label="Nächstes Bild" data-slide-step="1">›</button>
     </nav>
   </main>
   <script src="../assets/js/hall-of-fame.js"></script>
