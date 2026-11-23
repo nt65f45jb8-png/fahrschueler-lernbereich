@@ -8,8 +8,8 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const firstSlideClone = slides[0].cloneNode(true);
 const lastSlideClone = slides.at(-1).cloneNode(true);
 let currentPosition = 1;
-let autoplay;
-let autoplayResume;
+let touchStartX = null;
+let touchStartY = null;
 
 function prepareClone(clone) {
   clone.dataset.clone = "true";
@@ -66,28 +66,7 @@ function resetAfterLoop() {
   track.style.transition = "";
 }
 
-function startAutoplay() {
-  clearTimeout(autoplayResume);
-  clearInterval(autoplay);
-
-  if (mobileLayout.matches && !reducedMotion.matches && slides.length > 1) {
-    autoplay = setInterval(() => moveTo(currentPosition + 1), 5000);
-  }
-}
-
-function pauseAfterManualChange() {
-  clearInterval(autoplay);
-  clearTimeout(autoplayResume);
-
-  if (mobileLayout.matches && !reducedMotion.matches) {
-    autoplayResume = setTimeout(startAutoplay, 10000);
-  }
-}
-
 function updateLayout() {
-  clearTimeout(autoplayResume);
-  clearInterval(autoplay);
-
   if (!mobileLayout.matches) {
     currentPosition = 1;
     track.style.transition = "none";
@@ -101,7 +80,12 @@ function updateLayout() {
   firstSlideClone.hidden = false;
   lastSlideClone.hidden = false;
   moveTo(1, false);
-  startAutoplay();
+}
+
+function moveOneSlide(step) {
+  if (currentPosition === 0 && step < 0) moveTo(slides.length, false);
+  if (currentPosition === slides.length + 1 && step > 0) moveTo(1, false);
+  moveTo(currentPosition + step);
 }
 
 track.addEventListener("transitionend", event => {
@@ -110,23 +94,41 @@ track.addEventListener("transitionend", event => {
 
 slideButtons.forEach(button => {
   button.addEventListener("click", () => {
-    pauseAfterManualChange();
     moveTo(Number(button.dataset.slideTo) + 1);
   });
 });
 
 slideArrows.forEach(button => {
   button.addEventListener("click", () => {
-    pauseAfterManualChange();
-
-    if (currentPosition === 0) moveTo(slides.length, false);
-    if (currentPosition === slides.length + 1) moveTo(1, false);
-
-    moveTo(currentPosition + Number(button.dataset.slideStep));
+    moveOneSlide(Number(button.dataset.slideStep));
   });
 });
 
-document.querySelector(".hall-of-fame-slider-controls").addEventListener("pointerdown", pauseAfterManualChange);
+gallery.addEventListener("touchstart", event => {
+  const touch = event.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}, { passive: true });
+
+gallery.addEventListener("touchend", event => {
+  if (touchStartX === null || touchStartY === null) return;
+
+  const touch = event.changedTouches[0];
+  const deltaX = touch.clientX - touchStartX;
+  const deltaY = touch.clientY - touchStartY;
+
+  if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+    moveOneSlide(deltaX < 0 ? 1 : -1);
+  }
+
+  touchStartX = null;
+  touchStartY = null;
+}, { passive: true });
+
+gallery.addEventListener("touchcancel", () => {
+  touchStartX = null;
+  touchStartY = null;
+}, { passive: true });
 
 mobileLayout.addEventListener("change", updateLayout);
 reducedMotion.addEventListener("change", updateLayout);
